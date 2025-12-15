@@ -1,59 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Mini-LMS (Learning Management System)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive Learning Management System built with Laravel & MySQL for managing courses, faculty, and students with advanced session tracking.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Core Modules
+- **User Authentication** (Register/Login with Laravel Breeze)
+- **Course Management** (Create, Read, Update, Delete)
+- **Faculty Management** (Add teachers with name, email, phone, department)
+- **Student Management** (Add students with name, email, phone, roll number, program)
+- Only resource creators can edit/delete their own records
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Session Management Features
+- **Automatic Session Creation** on user login
+- **Login Counter** - Tracks number of logins
+- **Last Login Time** - Records timestamp of each login
+- **JSON Session Storage** - User data stored in JSON format
+- **Dashboard Display** - Shows all session data including:
+  - Username and Email
+  - User Role
+  - Login Statistics
+  - Academic Information (Course, Semester, Year)
+  - Raw JSON data view
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### UI Features
+- Clean and responsive design with Tailwind CSS
+- Color-coded action buttons
+- Real-time statistics cards
+- Professional dashboard layout
 
-## Learning Laravel
+## Technologies Used
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Laravel 12.40.2
+- PHP 8.4.1
+- MySQL (via MAMP)
+- Tailwind CSS
+- Laravel Breeze (Authentication)
+- JSON Session Storage
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+1. Clone the repository
+```bash
+git clone https://github.com/keshav-chhabira6/mini-lms.git
+cd mini-lms
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. Install dependencies
+```bash
+composer install
+npm install
+```
 
-### Premium Partners
+3. Create .env file
+```bash
+cp .env.example .env
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+4. Generate application key
+```bash
+php artisan key:generate
+```
 
-## Contributing
+5. Configure database in .env file
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=8889
+DB_DATABASE=mini_lms
+DB_USERNAME=root
+DB_PASSWORD=root
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6. Run migrations
+```bash
+php artisan migrate
+```
 
-## Code of Conduct
+7. Build assets
+```bash
+npm run build
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+8. Start the server
+```bash
+php artisan serve
+```
 
-## Security Vulnerabilities
+9. Visit: http://localhost:8000
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Session Tracking Implementation
+
+The system automatically tracks user sessions using a custom middleware (`TrackUserSession`):
+
+- Creates PHP associative array with user data
+- Converts to JSON using `json_encode()`
+- Stores in Laravel session
+- Retrieves and displays using `json_decode()` on dashboard
+
+### Tracked Data:
+- Username
+- Email
+- Role
+- Login Counter (increments on each new login)
+- Last Login Time
+- Academic Info (Course, Semester, Year) in JSON format
+
+## Usage
+
+1. **Register** a new account
+2. **Login** - Session tracking begins automatically
+3. Navigate to:
+   - **Dashboard** - View your session information
+   - **Courses** - Manage courses
+   - **Faculty** - Manage faculty members
+   - **Students** - Manage student records
+
+## Database Schema
+
+- `users` - User authentication
+- `courses` - Course information
+- `faculties` - Faculty member details
+- `students` - Student records
+- All tables include timestamps and user relationships
+
+## Author
+
+Keshav Chhabira
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Open source - Educational project
