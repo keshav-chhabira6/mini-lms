@@ -1,5 +1,4 @@
 <?php
-<?php
 
 namespace App\Models;
 
@@ -13,18 +12,8 @@ class Course extends Model
         'user_id'
     ];
 
-    // Relationship: A course belongs to a user
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-}
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-
-class Course extends Model
-{
-    //
 }

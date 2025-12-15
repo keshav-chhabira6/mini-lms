@@ -12,9 +12,11 @@
                     
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-2xl font-bold">All Faculty Members</h3>
-                        <a href="{{ route('faculty.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Add New Faculty
-                        </a>
+                        <a href="{{ route('faculty.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+    Add New Faculty
+</a>
+                          
+                       
                     </div>
 
                     @if(session('success'))
